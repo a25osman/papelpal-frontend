@@ -1,16 +1,16 @@
 import React from 'react'
 
-const GroceryList = (props) => {
+const GroceryList = ({groceryList, setGroceryList}) => {
   return (
     <>
         <div>GroceryList</div>
-        {/* <div>
-            {props.list.map((item, idx) => {
+        <div>
+            {groceryList.map((groceryItem, idx) => {
                 return (
-                    <h1 key={idx}> {item} </h1>
+                    <h1 key={idx}> {groceryItem.item} </h1>
                 )
             })}
-        </div> */}
+        </div>
     </>
   )
 }

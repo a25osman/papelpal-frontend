@@ -20,8 +20,8 @@ function App() {
   
   return (
     <Box>
-      <Form />
-      <GroceryList list={groceryList} />
+      <Form groceryList={groceryList} setGroceryList={setGroceryList} />
+      <GroceryList groceryList={groceryList} setGroceryList={setGroceryList}/>
     </Box>
   );
 }

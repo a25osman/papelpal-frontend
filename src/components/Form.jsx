@@ -5,7 +5,7 @@ import {Paper, IconButton} from '@mui/material';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
 
-const Form = () => {
+const Form = ({groceryList, setGroceryList}) => {
     const [groceryItem, setGroceryItem] = useState("")
     const handleSubmit = async (event) => {
         event.preventDefault();
