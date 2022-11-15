@@ -4,13 +4,13 @@ const GroceryList = (props) => {
   return (
     <>
         <div>GroceryList</div>
-        <div>
+        {/* <div>
             {props.list.map((item, idx) => {
                 return (
                     <h1 key={idx}> {item} </h1>
                 )
             })}
-        </div>
+        </div> */}
     </>
   )
 }
