@@ -12,7 +12,7 @@ function App() {
     axios
       .get(`http://localhost:3001/api/groceries`, {}, {withCredentials: true})
       .then(res => {
-        setGroceryList([...res.data])
+        setGroceryList([...res.data]);
       })
       .catch(err => {
         console.log(err)

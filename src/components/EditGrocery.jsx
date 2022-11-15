@@ -6,30 +6,25 @@ import CloseIcon from '@mui/icons-material/Close'
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
+import {groceryListUpdate} from '../helpers/groceryListUpdate';
 
-const EditGrocery = ({handleClose, id, item, qty, is_purchased, groceryList, setGroceryList}) => {
+const EditGrocery = ({handleClose, id, item, qty, groceryList, setGroceryList}) => {
     const [updatedItem, setUpdatedItem] = useState(item);
     const [updatedQty, setUpdatedQty] = useState(qty);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log({id, item: updatedItem, qty: updatedQty, is_purchased})
-        const re = await axios.put(
+        if (!updatedItem || /^\s*$/.test(updatedItem) || !updatedQty || isNaN(updatedQty) || updatedQty < 0) {
+            return;
+        }
+        
+        const res = await axios.put(
             `http://localhost:3001/api/groceries/${id}`,
             { item: updatedItem, qty: updatedQty },
             { withCredentials: true }
         );
-        
-        const groceryItem = {id, item: updatedItem, qty: updatedQty, is_purchased}
-        const res = []
-        for (let obj of groceryList) {
-            if (obj.id == id) {
-                res.push(groceryItem)
-            } else {
-                res.push(obj)
-            }
-        }
-        setGroceryList(res);
+        const updatedGroceryItem = res.data.rows[0];
+        setGroceryList(groceryListUpdate(updatedGroceryItem, groceryList));
         handleClose();
     }
 

@@ -32,21 +32,18 @@ const GroceryItem = ({id, item, qty, is_purchased, groceryList, setGroceryList})
 
     return (
         <Card sx={{height: "100%", boxShadow: 4}}>
-            <CardActionArea>
+            <CardActionArea sx={{height: "900%"}}>
                 <CardContent onClick={()=>console.log("heloooo")}>
                     <Typography variant="h5" component="div">
                         {item}
                     </Typography>
-                    {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        category
-                    </Typography> */}
-                    <Typography variant="h6">
-                        x10
+                    <Typography variant="h6" color="text.secondary">
+                        x{qty}
                         <br />
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActions>
+            <CardActions sx={{height: "10%"}}>
                 <IconButton size="small" onClick={handleOpen}>
                     <EditIcon sx={{ color: "#1976D2", fontSize:40  }} color="primary" />
                 </IconButton>
