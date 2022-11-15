@@ -1,6 +1,10 @@
 import React from 'react'
 import { useState } from 'react';
+import axios from 'axios'
+
 import EditGrocery from './EditGrocery';
+import {groceryListUpdateAfterDelete} from '../helpers/groceryListUpdate';
+
 
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -30,6 +34,15 @@ const GroceryItem = ({id, item, qty, is_purchased, groceryList, setGroceryList})
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const handleDelete = async () => {
+        await axios.delete(
+            `http://localhost:3001/api/groceries/${id}`,
+            { },
+            { withCredentials: true }
+        );
+        setGroceryList(groceryListUpdateAfterDelete(id, groceryList));
+    }
+
     return (
         <Card sx={{height: "100%", boxShadow: 4}}>
             <CardActionArea sx={{height: "900%"}}>
@@ -57,7 +70,7 @@ const GroceryItem = ({id, item, qty, is_purchased, groceryList, setGroceryList})
                         <EditGrocery item={item} id={id} qty={qty} is_purchased={is_purchased} groceryList={groceryList} setGroceryList={setGroceryList} handleClose={handleClose} />
                     </Box>
                 </Modal>
-                <IconButton size="small" color="primary">
+                <IconButton size="small" color="primary" onClick={handleDelete}>
                     <DeleteIcon sx={{color: 'red', fontSize: 40}} />
                 </IconButton>
             </CardActions>

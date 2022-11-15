@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-import {groceryListUpdate} from '../helpers/groceryListUpdate';
+import {groceryListUpdateAfterEdit} from '../helpers/groceryListUpdate';
 
 const EditGrocery = ({handleClose, id, item, qty, groceryList, setGroceryList}) => {
     const [updatedItem, setUpdatedItem] = useState(item);
@@ -24,7 +24,7 @@ const EditGrocery = ({handleClose, id, item, qty, groceryList, setGroceryList}) 
             { withCredentials: true }
         );
         const updatedGroceryItem = res.data.rows[0];
-        setGroceryList(groceryListUpdate(updatedGroceryItem, groceryList));
+        setGroceryList(groceryListUpdateAfterEdit(updatedGroceryItem, groceryList));
         handleClose();
     }
 
