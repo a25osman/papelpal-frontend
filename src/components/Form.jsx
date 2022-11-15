@@ -10,12 +10,15 @@ const Form = ({groceryList, setGroceryList}) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         // window.location.reload(false);
-        await axios.post(
+        const res = await axios.post(
             `http://localhost:3001/api/groceries/`,
             { groceryItem },
             { withCredentials: true }
         );
         
+        const id = res.data.rows[0].id
+        setGroceryList([...groceryList, { id, item: groceryItem, qty: 1, is_purchased: false }]);
+        setGroceryItem("");
     };
 
   return (

@@ -7,6 +7,7 @@ import axios from "axios";
 
 function App() {
   const [groceryList, setGroceryList] = useState([])
+  
   useEffect(() => {
     axios
       .get(`http://localhost:3001/api/groceries`, {}, {withCredentials: true})
