@@ -10,10 +10,12 @@ import Typography from '@mui/material/Typography';
 import {groceryListUpdateAfterEdit} from '../helpers/groceryListUpdate';
 
 const EditGrocery = ({handleClose, id, item, qty, groceryList, setGroceryList}) => {
+    // This component allows users update grocery item description and qty
     const [updatedItem, setUpdatedItem] = useState(item);
     const [updatedQty, setUpdatedQty] = useState(qty);
 
     const handleSubmit = async (event) => {
+        // updates information in state and database
         event.preventDefault();
         if (!updatedItem || /^\s*$/.test(updatedItem) || updatedItem.length > 20 || !updatedQty || isNaN(updatedQty) || updatedQty < 0 || updatedQty > 1000) {
             return;

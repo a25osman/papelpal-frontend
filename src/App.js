@@ -16,6 +16,7 @@ function App() {
   const [groceryList, setGroceryList] = useState([])
   
   useEffect(() => {
+    // This api call is used to retrive all grocery items from database
     axios
       .get(`http://localhost:3001/api/groceries`, {}, {withCredentials: true})
       .then(res => {

@@ -7,9 +7,11 @@ import InputAdornment from "@mui/material/InputAdornment";
 
 
 const Form = ({groceryList, setGroceryList}) => {
+    // This component is a form for which, on submission, creates adds new grocery items
     const [groceryItem, setGroceryItem] = useState("");
-    
+
     const handleSubmit = async (event) => {
+      // on submission, the new grocery items are added to database and updated in the state.
         event.preventDefault();
         if (!groceryItem || /^\s*$/.test(groceryItem)) {
           return;

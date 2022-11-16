@@ -32,14 +32,19 @@ const style = {
     p: 4
 };
 
+// create array of colors to style dispayed grocery items
 const colors = ["fuchsia", "lime", "aqua", "darkred", "goldenrod", "royalblue", "mediumspringgreen", "purple"]
 
 const GroceryItem = ({id, index, item, qty, is_purchased, groceryList, setGroceryList}) => {
+    // This component organises grocery item information and allows users to mark item as purchased  / delete item
+    // The edit button will open a modal to allow users to edit item description & quantity
+
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     const handleDelete = async () => {
+        // deletes grocery item from database and removes from state as well
         await axios.delete(
             `http://localhost:3001/api/groceries/${id}`,
             { },
@@ -49,6 +54,7 @@ const GroceryItem = ({id, index, item, qty, is_purchased, groceryList, setGrocer
     }
 
     const handlePurchase = async () => {
+        // marks grocery item as (un)purchased in state and database, and applies styling to indicate that
         await axios.put(
             `http://localhost:3001/api/groceries/${id}/complete`,
             { is_purchased },

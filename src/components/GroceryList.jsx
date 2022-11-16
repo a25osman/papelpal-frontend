@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 
 
 const GroceryList = ({groceryList, setGroceryList}) => {
+  // This component renders each and every grocery item
     
   return (
     <Grid sx={{bgcolor:'background.paper', marginRight: '200px'}} container spacing={3} justifyContent="center" alignItems="center">
