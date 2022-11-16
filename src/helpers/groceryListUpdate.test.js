@@ -2,7 +2,7 @@ import {groceryListUpdateAfterEdit} from './groceryListUpdate';
 import {groceryListUpdateAfterDelete} from './groceryListUpdate';
 import {groceryListUpdateAfterPurchase} from './groceryListUpdate';
 
-const state = [
+const groceryList = [
   {id: 1, item: "apples", qty: 12, is_purchased: false},
   {id: 2, item: "sauce", qty: 2, is_purchased: false},
   {id: 3, item: "lettuce", qty: 1, is_purchased: true},
@@ -13,20 +13,20 @@ const state = [
 const updatedGroceryItem = {id: 3, item: "Cabbage", qty: 2, is_purchased: true}
 
 test("testing the function: groceryListUpdateAfterEdit", () => {
-  const newState = groceryListUpdateAfterEdit(updatedGroceryItem, state);
-  expect(newState[2].id).toEqual(3);
-  expect(newState[2].item).toEqual("Cabbage");
-  expect(newState[2].qty).toEqual(2);
-  expect(newState[2].is_purchased).toEqual(true);
-  expect(newState.length).toEqual(5);
+  const updatedGroceryList = groceryListUpdateAfterEdit(updatedGroceryItem, groceryList);
+  expect(updatedGroceryList[2].id).toEqual(3);
+  expect(updatedGroceryList[2].item).toEqual("Cabbage");
+  expect(updatedGroceryList[2].qty).toEqual(2);
+  expect(updatedGroceryList[2].is_purchased).toEqual(true);
+  expect(updatedGroceryList.length).toEqual(5);
 });
 
 test("testing the function: groceryListUpdateAfterDelete", () => {
-  const newState = groceryListUpdateAfterDelete(5, state);
-  expect(newState.length).toEqual(4);
+  const updatedGroceryList = groceryListUpdateAfterDelete(5, groceryList);
+  expect(updatedGroceryList.length).toEqual(4);
 });
 
 test("testing the function: groceryListUpdateAfterPurchase", () => {
-  const newState = groceryListUpdateAfterPurchase(1, state);
-  expect(newState[0].is_purchased).toEqual(true);
+  const updatedGroceryList = groceryListUpdateAfterPurchase(1, groceryList);
+  expect(updatedGroceryList[0].is_purchased).toEqual(true);
 });
