@@ -1,5 +1,5 @@
 export function groceryListUpdateAfterEdit(updatedGroceryItem, groceryList) {
-
+  // This function is used to update state with new item description and qty after user submits edits 
   const updatedGroceryList = [];
   for (let groceryItem of groceryList) {
     if (groceryItem.id == updatedGroceryItem.id) {
@@ -14,7 +14,7 @@ export function groceryListUpdateAfterEdit(updatedGroceryItem, groceryList) {
 
 
 export function groceryListUpdateAfterDelete(id, groceryList) {
-
+  // This function is used to delete a grocery item from state clicks delete button
   const updatedGroceryList = [];
   for (let groceryItem of groceryList) {
     if (id == groceryItem.id) {
@@ -28,7 +28,7 @@ export function groceryListUpdateAfterDelete(id, groceryList) {
 }
 
 export function groceryListUpdateAfterPurchase(id, groceryList) {
-
+  // This function is used to mark a grocery item as purchased in the state, after user clicks on item
   const updatedGroceryList = [];
   for (let groceryItem of groceryList) {
     if (id == groceryItem.id) {
