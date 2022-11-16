@@ -4,8 +4,10 @@ import axios from 'axios'
 
 import EditGrocery from './EditGrocery';
 import {groceryListUpdateAfterDelete} from '../helpers/groceryListUpdate';
+import {groceryListUpdateAfterPurchase} from '../helpers/groceryListUpdate';
 
 
+import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -16,6 +18,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import Tooltip from '@mui/material/Tooltip';
 
 const style = {
     position: "absolute",
@@ -29,7 +32,9 @@ const style = {
     p: 4
 };
 
-const GroceryItem = ({id, item, qty, is_purchased, groceryList, setGroceryList}) => {
+const colors = ["fuchsia", "lime", "aqua", "darkred", "goldenrod", "royalblue", "mediumspringgreen", "purple"]
+
+const GroceryItem = ({id, index, item, qty, is_purchased, groceryList, setGroceryList}) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -43,23 +48,47 @@ const GroceryItem = ({id, item, qty, is_purchased, groceryList, setGroceryList})
         setGroceryList(groceryListUpdateAfterDelete(id, groceryList));
     }
 
+    const handlePurchase = async () => {
+        await axios.put(
+            `http://localhost:3001/api/groceries/${id}/complete`,
+            { is_purchased },
+            { withCredentials: true }
+        );
+        setGroceryList(groceryListUpdateAfterPurchase(id, groceryList));
+    }
+
     return (
-        <Card sx={{height: "100%", boxShadow: 4}}>
-            <CardActionArea sx={{height: "900%"}}>
-                <CardContent onClick={()=>console.log("heloooo")}>
-                    <Typography variant="h5" component="div">
-                        {item}
-                    </Typography>
-                    <Typography variant="h6" color="text.secondary">
-                        x{qty}
-                        <br />
-                    </Typography>
-                </CardContent>
+        <Card sx={{
+            height: "100%",
+            boxShadow: 4,
+            opacity: is_purchased ? "35%" : '100%',
+            borderRadius: 10,
+            border: "1px solid #e3e3e3",
+        }}>
+            <CardActionArea sx={{
+                height: '200px',
+                bgcolor: is_purchased ? "lightgrey" : index < colors.length ? colors[index] : colors[colors.length % index]  
+                }}
+                onClick={handlePurchase}
+            >
+                <Grid container justifyContent="center" alignItems="center">
+                    <CardContent>
+                        <Typography variant="h5" sx={{fontSize:40, color: is_purchased ? 'black' : 'white', fontWeight: 'bold', textDecoration : is_purchased ? 'line-through' : 'none'}} >
+                            {item}
+                        </Typography>
+                        <Typography variant="h6" color="text.secondary" sx={{fontSize:40, color: is_purchased ? 'black' : 'white'}} >
+                            x{qty}
+                        </Typography>
+                    </CardContent>
+                </Grid>
             </CardActionArea>
-            <CardActions sx={{height: "10%"}}>
-                <IconButton size="small" onClick={handleOpen}>
-                    <EditIcon sx={{ color: "#1976D2", fontSize:40  }} color="primary" />
-                </IconButton>
+            <CardActions sx={{}}>
+                <Grid container justifyContent="right" alignItems="center">
+                    <Tooltip title="Edit">
+                    <IconButton size="small" onClick={handleOpen}>
+                        <EditIcon sx={{ color: "#1976D2", fontSize:40  }} color="primary" />
+                    </IconButton>
+                </Tooltip>
                 <Modal
                     open={open}
                     onClose={handleClose}
@@ -70,9 +99,12 @@ const GroceryItem = ({id, item, qty, is_purchased, groceryList, setGroceryList})
                         <EditGrocery item={item} id={id} qty={qty} is_purchased={is_purchased} groceryList={groceryList} setGroceryList={setGroceryList} handleClose={handleClose} />
                     </Box>
                 </Modal>
-                <IconButton size="small" color="primary" onClick={handleDelete}>
-                    <DeleteIcon sx={{color: 'red', fontSize: 40}} />
-                </IconButton>
+                <Tooltip title="Delete" arrow>
+                    <IconButton size="small" color="primary" onClick={handleDelete}>
+                        <DeleteIcon sx={{color: 'red', fontSize: 40}} />
+                    </IconButton>
+                </Tooltip>
+                </Grid>
             </CardActions>
         </Card>
     )

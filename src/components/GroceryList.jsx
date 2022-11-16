@@ -6,11 +6,12 @@ import Grid from '@mui/material/Grid';
 const GroceryList = ({groceryList, setGroceryList}) => {
     
   return (
-    <Grid sx={{bgcolor:'background.paper'}} container spacing={2} justifyContent="center" alignItems="center">
-      {groceryList.map((groceryItem) => {
+    <Grid sx={{bgcolor:'background.paper', marginRight: '200px'}} container spacing={3} justifyContent="center" alignItems="center">
+      {groceryList.map((groceryItem, index) => {
         return (
             <Grid item xs={7} sm={7} md={4} xl={3} key={groceryItem.id}>
               <GroceryItem
+                index={index}
                 item={groceryItem.item}
                 id={groceryItem.id}
                 qty={groceryItem.qty}
