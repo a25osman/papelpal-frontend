@@ -67,7 +67,7 @@ const GroceryItem = ({id, index, item, qty, is_purchased, groceryList, setGrocer
         }}>
             <CardActionArea sx={{
                 height: '200px',
-                bgcolor: is_purchased ? "lightgrey" : index < colors.length ? colors[index] : colors[colors.length % index]  
+                bgcolor: is_purchased ? "lightgrey" : index < colors.length ? colors[index] : colors[index % colors.length]  
                 }}
                 onClick={handlePurchase}
             >

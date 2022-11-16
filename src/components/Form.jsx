@@ -1,15 +1,16 @@
 import React from 'react'
 import axios from 'axios';
 import { useState } from 'react'
-import {Paper, IconButton} from '@mui/material';
+import {IconButton, Grid, TextField} from '@mui/material';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import InputAdornment from "@mui/material/InputAdornment";
 
 
 const Form = ({groceryList, setGroceryList}) => {
-    const [groceryItem, setGroceryItem] = useState("")
+    const [groceryItem, setGroceryItem] = useState("");
+    
     const handleSubmit = async (event) => {
         event.preventDefault();
-        // window.location.reload(false);
         if (!groceryItem || /^\s*$/.test(groceryItem)) {
           return;
       }
@@ -25,27 +26,24 @@ const Form = ({groceryList, setGroceryList}) => {
     };
 
   return (
-    <Paper
-      component="form"
-      onSubmit={handleSubmit}
-      sx = {{
-        borderRadius:20,
-        border: "1px solid #e3e3e3",
-        pl: 2,
-        boxShadow: 'none',
-        mr: {sm:50}
-      }}
-    >
-      <input 
-        className="item-field"
-        placeholder="Grocery..."
+    <Grid component="form" onSubmit={handleSubmit} container justifyContent="center" alignItems="center">
+      <TextField
+        placeholder="Enter grocery here..."
         value={groceryItem}
-        onChange={(e) => setGroceryItem(e.target.value)}
+        onChange={(event) => setGroceryItem(event.target.value)}
+        variant="filled"
+        sx={{mt:'30px', mb:'30px', width:"80%"}}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton type='submit' edge="end" color="primary">
+                <AddOutlinedIcon />
+              </IconButton>
+            </InputAdornment>
+          )
+        }}
       />
-      <IconButton type="submit" sx={{p:'10px', color: 'red' }}> 
-        <AddOutlinedIcon />
-      </IconButton>
-    </Paper>
+    </Grid>
   )
 }
 
