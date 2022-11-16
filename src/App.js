@@ -1,9 +1,16 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import Form from './components/Form';
-import GroceryList from './components/GroceryList';
-import { Box } from '@mui/material';
 import axios from "axios";
+import GroceryList from './components/GroceryList';
+import Form from './components/Form';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+
+import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
+
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
 
 function App() {
   const [groceryList, setGroceryList] = useState([])
@@ -20,10 +27,18 @@ function App() {
   }, [])
   
   return (
-    <Box sx={{}}>
+    <Stack spacing={2} sx={{mt: "3%"}} direction="column" justifyContent="center" alignItems="center">
+      <ThemeProvider theme={theme}>
+        <Typography  variant="h1">
+          PaperPal
+        </Typography>
+        <Typography variant="caption">
+          Never miss another grocery again.
+        </Typography>
+      </ThemeProvider>
       <Form groceryList={groceryList} setGroceryList={setGroceryList} />
       <GroceryList groceryList={groceryList} setGroceryList={setGroceryList}/>
-    </Box>
+    </Stack>
   );
 }
 

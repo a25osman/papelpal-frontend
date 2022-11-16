@@ -73,7 +73,7 @@ const GroceryItem = ({id, index, item, qty, is_purchased, groceryList, setGrocer
             >
                 <Grid container justifyContent="center" alignItems="center">
                     <CardContent>
-                        <Typography variant="h5" sx={{fontSize:40, color: is_purchased ? 'black' : 'white', fontWeight: 'bold', textDecoration : is_purchased ? 'line-through' : 'none'}} >
+                        <Typography variant="h5" sx={{wordBreak: "break-word", fontSize:40, color: is_purchased ? 'black' : 'white', fontWeight: 'bold', textDecoration : is_purchased ? 'line-through' : 'none'}} >
                             {item}
                         </Typography>
                         <Typography variant="h6" color="text.secondary" sx={{fontSize:40, color: is_purchased ? 'black' : 'white'}} >
