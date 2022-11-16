@@ -13,7 +13,7 @@ const Form = ({groceryList, setGroceryList}) => {
     const handleSubmit = async (event) => {
       // on submission, the new grocery items are added to database and updated in the state.
         event.preventDefault();
-        if (!groceryItem || /^\s*$/.test(groceryItem)) {
+        if (!groceryItem || /^\s*$/.test(groceryItem) || groceryItem.length > 20) {
           return;
       }
         const res = await axios.post(
