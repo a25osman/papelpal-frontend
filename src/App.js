@@ -4,7 +4,6 @@ import axios from "axios";
 import GroceryList from './components/GroceryList';
 import Form from './components/Form';
 import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
